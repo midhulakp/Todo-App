@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/css/stle.css">
 </head>
 
 <body>
@@ -20,16 +20,25 @@
         <div class="list">
             <table>
                 <tr>
-                    <td>TODO</td>
-                    <td>DONE?</td>
-                    <td>DELETE</td>
+                    <th>TODO</th>
+                    <th>STATUS</th>
+                    <th>DELETE</th>
                 </tr>
                 <% todos.forEach(todo=> { %>
                     <tr>
                         <td>
                             <%= todo.todoName %>
                         </td>
-                        <td><button>Done</button></td>
+                        <td>
+                            <form action="/api/v1/todo/<%= todo._id%>?_method=PUT" method="post">
+                                <input type="hidden" name="isCompleted" value=<%= !(todo.isCompleted) %>>
+                                <% if (todo.isCompleted){%> 
+                                  <button type="submit">Completed</button>
+                                <% }else {%>
+                                    <button type="submit">Not Completed</button>
+                                <% } %> 
+                            </form>
+                        </td>
                         <td>
                             <form action="/api/v1/todo/<%= todo._id%>?_method=DELETE" method="post">
                                 <button type="submit">Delete</button>

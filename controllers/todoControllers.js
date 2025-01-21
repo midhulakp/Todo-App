@@ -42,7 +42,7 @@ const updateTodo = async (req, res, next) => {
       { isCompleted: req.body.isCompleted },
       { new: true }
     );
-    res.status(200).json(updatedTodo);
+    res.redirect("/api/v1/todo");
   } catch (error) {
     res.status(400).send(error.message);
   }
