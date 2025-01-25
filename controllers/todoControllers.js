@@ -8,6 +8,7 @@ let postTodo = async (req, res, next) => {
     }
     await Todo.create({
       todoName: todoName,
+      user: req?.userId,
     });
     // res.status(201).send(newTodo);
     res.redirect("/api/v1/todo");
@@ -18,7 +19,7 @@ let postTodo = async (req, res, next) => {
 
 const getTodos = async (req, res, next) => {
   try {
-    let todos = await Todo.find();
+    let todos = await Todo.find({ user: req?.userId });
     // res.status(201).send(todos);
     res.render("home", { todos });
   } catch (error) {

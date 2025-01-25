@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 //model
 const todoSchema = new mongoose.Schema(
@@ -9,6 +9,11 @@ const todoSchema = new mongoose.Schema(
     isCompleted: {
       type: Boolean,
       default: false,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   {
